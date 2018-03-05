@@ -54,18 +54,58 @@ class $ {
 
   next (){
     let next = this.target[this.target.length - 1].nextElementSibling;
-    this.selector = '.' + next.className  next.tagName;
+    this.selector = '.' + next.className || next.tagName;
     this.target = document.querySelectorAll(this.selector);
     return this;
   }
   prev (){
     let prev = this.target[this.target.length - 1].previousElementSibling;
     console.log(prev);
-    this.selector = '.' + prev.className  prev.tagName;
+    this.selector = '.' + prev.className || prev.tagName;
     this.target = document.querySelectorAll(this.selector);
     return this;
   }
 
+  addClass (className) {
+    for (let value of this.target){
+      console.log(value)
+      value.classList.add(className);
+    }
+  }
+
+  removeClass (className) {
+    for (let value of this.target){
+      console.log(value)
+      value.classList.remove(className);
+    }
+  }
+
+  toggleClass (className) {
+    for (let value of this.target){
+      console.log(value)
+      value.classList.toggle(className);
+    }
+  }
+
+  text (here) {
+     if(here){
+        for (let value of this.target){
+        console.log(value)
+        value.innerText = here;
+      }
+      return this ;
+    }else return this.target[0].innerText;
+  }
+
+  html (here) {
+     if(here){
+        for (let value of this.target){
+        console.log(value)
+        value.innerHTML = here;
+      }
+      return this ;
+    }else return this.target[0].innerHTML;
+  }
 
   animate (options) {
 
@@ -84,8 +124,8 @@ class $ {
 
     document.documentElement.scrollTop += 5;
 
-    if( document.documentElement.scrollTop  values) clearInterval(timer);
-    if( document.documentElement.scrollHeight - 10  document.documentElement.clientHeight + pageYOffset) clearInterval(timer);
+    if( document.documentElement.scrollTop > values) clearInterval(timer);
+    if( document.documentElement.scrollHeight - 10 < document.documentElement.clientHeight + pageYOffset) clearInterval(timer);
 
     } , 0)
     return this;
